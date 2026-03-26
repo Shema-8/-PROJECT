@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Media - SHINE YOUNG</title>
+<link rel="stylesheet" href="style.css">
+
+<style>
+/* Extra styling for videos */
+.video-card iframe {
+    width: 100%;
+    height: 200px;
+    border-radius: 10px;
+    margin-bottom: 10px;
+}
+
+.video-card {
+    padding: 15px;
+}
+</style>
+
+</head>
+
+<body>
+
+<!-- NAVBAR -->
+<nav>
+    <h1>SHINE YOUNG</h1>
+    <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="stories.html">Stories</a></li>
+        <li><a href="proverbs.html">Proverbs</a></li>
+        <li><a href="media.html">Media</a></li>
+        <li><a href="school-culture.html">School Culture</a></li>
+    </ul>
+</nav>
+
+<!-- HEADER -->
+<section class="section">
+    <h1>🎬 Music & Dance</h1>
+    <p>Watch and experience Rwanda’s rich cultural performances.</p>
+
+    <div class="cards">
+
+        <!-- VIDEO 1 -->
+        <div class="card video-card">
+            <iframe src="https://www.youtube.com/embed/1VdXG6QpV3Q" allowfullscreen></iframe>
+            <h3>Intore Dance</h3>
+            <p>Traditional Rwandan warrior dance performance.</p>
+        </div>
+
+        <!-- VIDEO 2 -->
+        <div class="card video-card">
+            <iframe src="https://www.youtube.com/embed/ysz5S6PUM-U" allowfullscreen></iframe>
+            <h3>Traditional Drumming</h3>
+            <p>Experience the rhythm of Rwandan drums.</p>
+        </div>
+
+        <!-- VIDEO 3 -->
+        <div class="card video-card">
+            <iframe src="https://www.youtube.com/embed/tgbNymZ7vqY" allowfullscreen></iframe>
+            <h3>Folk Music</h3>
+            <p>Enjoy traditional songs and melodies.</p>
+        </div>
+
+        <!-- VIDEO 4 -->
+        <div class="card video-card">
+            <iframe src="https://www.youtube.com/embed/oUFJJNQGwhk" allowfullscreen></iframe>
+            <h3>Cultural Performance</h3>
+            <p>A showcase of Rwanda’s cultural heritage.</p>
+        </div>
+
+    </div>
+</section>
+<script>
+fetch("/api/media")
+  .then(res => res.json())
+  .then(data => {
+    const container = document.querySelector(".cards");
+
+    data.forEach(video => {
+      const div = document.createElement("div");
+      div.classList.add("card");
+
+      div.innerHTML = `
+        <iframe src="${video.video}" allowfullscreen></iframe>
+        <h3>${video.title}</h3>
+        <p>${video.description}</p>
+      `;
+
+      container.appendChild(div);
+    });
+  });
+</script>
+</body>
+</html>

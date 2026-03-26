@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Stories - SHINE YOUNG</title>
+<link rel="stylesheet" href="style.css">
+
+<style>
+.story-hero {
+    text-align: center;
+    padding: 40px;
+    background: #f4c542;
+    color: #1e2a38;
+}
+.story-list {
+    max-width: 900px;
+    margin: auto;
+}
+.story-item {
+    background: white;
+    padding: 20px;
+    margin: 20px 0;
+    border-radius: 10px;
+}
+.story-item a {
+    display: inline-block;
+    margin-top: 10px;
+    color: #f4c542;
+    font-weight: bold;
+}
+.external-link {
+    display: block;
+    margin: 30px auto;
+    width: fit-content;
+    padding: 10px 20px;
+    background: #1e2a38;
+    color: white;
+    border-radius: 8px;
+    text-decoration: none;
+}
+</style>
+
+</head>
+<body>
+
+<nav>
+<h1>SHINE YOUNG</h1>
+<ul>
+<li><a href="index.html">Home</a></li>
+<li><a href="stories.html">Stories</a></li>
+<li><a href="proverbs.html">Proverbs</a></li>
+<li><a href="media.html">Media</a></li>
+<li><a href="school-culture.html">School Culture</a></li>
+</ul>
+</nav>
+
+<div class="story-hero">
+<h1>📖 Rwandan Stories</h1>
+<p>Explore wisdom and culture through traditional storytelling.</p>
+</div>
+
+<section class="story-list">
+
+<div class="story-item">
+<h2>The Lion & The Hare</h2>
+<p>A clever hare saves the forest by outsmarting a lion .</p>
+<a class="external-link" href="https://bloomlibrary.org/player/pGPNRTjPHV" target="_blank">Read More</a>
+</div>
+
+<div class="story-item">
+<h2>The Wise Child</h2>
+<p>A story about intelligence and courage among young learners.</p>
+<a href="#">Read More</a>
+</div>
+
+<a class="external-link" href="https://bloomlibrary.org/language:rw" target="_blank">
+🌍 Explore More Stories (Bloom Library)
+</a>
+
+</section>
+<script src="js/stories.js"></script>
+<script>
+fetch("/api/stories")
+  .then(res => res.json())
+  .then(data => {
+    const container = document.querySelector(".story-list");
+
+    data.forEach(story => {
+      const div = document.createElement("div");
+      div.classList.add("story-item");
+
+      div.innerHTML = `
+        <h2>${story.title}</h2>
+        <p>${story.description}</p>
+        <a href="${story.link}">Read More</a>
+      `;
+
+      container.appendChild(div);
+    });
+  });
+</script>
+</body>
+</html>
